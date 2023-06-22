@@ -1,5 +1,6 @@
 {
     "name": "phodoval/kaufland-marketplace",
+    "version": "0.1.0",
     "description": "PHP implementation of Kaufland Marketplace Seller API",
     "type": "library",
     "require": {
