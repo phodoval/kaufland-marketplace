@@ -21,7 +21,7 @@ class Category {
         public array $children = [],
 
         /**
-         * @var array<\App\Kaufland\Dto\Attribute>
+         * @var array<\Phodoval\KauflandMarketplace\Dto\Attribute>
          */
         public array $required_attributes = [],
     ) {}

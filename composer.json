@@ -16,5 +16,8 @@
         {
             "name": "phodoval"
         }
-    ]
+    ],
+    "require-dev": {
+        "phpstan/phpstan": "^1.10"
+    }
 }

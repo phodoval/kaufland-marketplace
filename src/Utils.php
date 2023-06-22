@@ -2,7 +2,7 @@
 namespace Phodoval\KauflandMarketplace;
 
 class Utils {
-    public static function signRequest(string $method, string $uri, $body, int $timestamp, string $secretKey) {
+    public static function signRequest(string $method, string $uri, string $body, int $timestamp, string $secretKey): string {
         $string = implode("\n", [
             $method,
             $uri,

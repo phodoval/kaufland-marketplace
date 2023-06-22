@@ -1,9 +1,9 @@
 <?php
 namespace Phodoval\KauflandMarketplace\Namespaces;
 
-use App\Kaufland\Dto\Attribute;
-use App\Kaufland\Dto\AttributeList;
-use App\Kaufland\Dto\AttributeResult;
+use Phodoval\KauflandMarketplace\Dto\Attribute;
+use Phodoval\KauflandMarketplace\Dto\AttributeList;
+use Phodoval\KauflandMarketplace\Dto\AttributeResult;
 use CuyZ\Valinor\Mapper\MappingError;
 use GuzzleHttp\Exception\GuzzleException;
 

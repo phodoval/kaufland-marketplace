@@ -1,9 +1,9 @@
 <?php
 namespace Phodoval\KauflandMarketplace\Namespaces;
 
-use App\Kaufland\Dto\Order;
-use App\Kaufland\Dto\OrderList;
-use App\Kaufland\Dto\OrderResult;
+use Phodoval\KauflandMarketplace\Dto\Order;
+use Phodoval\KauflandMarketplace\Dto\OrderList;
+use Phodoval\KauflandMarketplace\Dto\OrderResult;
 use CuyZ\Valinor\Mapper\MappingError;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -18,6 +18,11 @@ class Orders extends AbstractNamespace {
         ]);
     }
 
+    /**
+     * @param string        $id
+     * @param string[]|null $embedded
+     * @return Order|null
+     */
     public function get(string $id, array $embedded = null): ?Order {
         try {
             return $this->request('GET', '/'.$id, OrderResult::class, query: [

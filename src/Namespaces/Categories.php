@@ -1,9 +1,9 @@
 <?php
 namespace Phodoval\KauflandMarketplace\Namespaces;
 
-use App\Kaufland\Dto\Category;
-use App\Kaufland\Dto\CategoryList;
-use App\Kaufland\Dto\CategoryTree;
+use Phodoval\KauflandMarketplace\Dto\Category;
+use Phodoval\KauflandMarketplace\Dto\CategoryList;
+use Phodoval\KauflandMarketplace\Dto\CategoryTree;
 use CuyZ\Valinor\Mapper\MappingError;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -38,12 +38,18 @@ class Categories extends AbstractNamespace {
         return $this->request('GET', '/tree', CategoryTree::class, query: ['storefront' => $storefront]);
     }
 
+    /**
+     * @param int            $id
+     * @param string         $storefront
+     * @param string[]|null  $embedded
+     * @return Category|null
+     */
     public function get(int $id, string $storefront = 'cz', array $embedded = null): ?Category {
         try {
             return $this->request('GET', '/'.$id, CategoryTree::class, query: [
                 'storefront' => $storefront,
                 'embedded' => !empty($embedded) ? implode(',', $embedded) : null,
-            ])?->data;
+            ])->data;
         } catch (GuzzleException|MappingError) {
             return null;
         }

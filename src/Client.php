@@ -1,6 +1,8 @@
 <?php
+
 namespace Phodoval\KauflandMarketplace;
 
+use Exception;
 use GuzzleHttp;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -22,25 +24,50 @@ class Client {
     }
 
     /**
+     * @param string                    $method
+     * @param string                    $uri
+     * @param array<string, mixed>|null $data
+     * @param array<string, mixed>|null $query
+     * @return array<string, mixed>
      * @throws GuzzleException
+     * @throws Exception
      */
-    public function request(string $method, string $uri, $data = null, array $query = null): mixed {
+    public function request(string $method, string $uri, array $data = null, array $query = null): array {
         $timestamp = time();
-        $url = $this->transport->getConfig('base_uri').$uri;
+        $url = $this->transport->getConfig('base_uri') . $uri;
         if (!empty($query)) {
-            $url .= '?'.http_build_query($query);
+            $url .= '?' . http_build_query($query);
         }
+
+        $body = '';
+        if (!empty($data)) {
+            $body = json_encode($data);
+
+            if (!$body) {
+                throw new Exception('Failed encoding JSON request.');
+            }
+        }
+
         $options = [
             'headers' => [
                 'Shop-Timestamp' => $timestamp,
-                'Shop-Signature' => Utils::signRequest($method, $url, $data ?? '', $timestamp, $this->secretKey),
+                'Shop-Signature' => Utils::signRequest($method, $url, $body, $timestamp, $this->secretKey),
             ],
             'query' => $query,
         ];
 
         $response = $this->transport->request($method, $uri, $options);
 
-        return json_decode($response->getBody()->getContents(), true);
+        /**
+         * @var array<string, mixed>|null $data
+         */
+        $data = json_decode($response->getBody()->getContents(), true);
+
+        if ($data === null) {
+            throw new Exception('Failed parsing JSON response.');
+        }
+
+        return $data;
     }
 
     public function categories(): Namespaces\Categories {
