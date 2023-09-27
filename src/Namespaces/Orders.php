@@ -12,9 +12,11 @@ class Orders extends AbstractNamespace {
      * @throws GuzzleException
      * @throws MappingError
      */
-    public function list(string $storefront = 'cz'): OrderList {
+    public function list(string $storefront = 'cz', int $offset = 0, int $limit = 20): OrderList {
         return $this->request('GET', '', OrderList::class, query: [
             'storefront' => $storefront,
+            'offset' => $offset,
+            'limit' => $limit,
         ]);
     }
 
