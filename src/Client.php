@@ -80,4 +80,8 @@ class Client {
     public function orders(): Namespaces\Orders {
         return new Namespaces\Orders($this);
     }
+
+    public function orderUnits(): Namespaces\OrderUnits {
+        return new Namespaces\OrderUnits($this);
+    }
 }
