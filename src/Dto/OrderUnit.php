@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Phodoval\KauflandMarketplace\Dto;
 
 use DateTime;
@@ -33,45 +35,3 @@ class OrderUnit {
     ) {}
 }
 
-class Buyer {
-    public function __construct(
-        public int $id_buyer,
-        public string $email,
-    ) {}
-}
-
-class Address {
-    public function __construct(
-        public string $first_name,
-        public string $last_name,
-        public string $company_name,
-        public string $street,
-        public string $house_number,
-        public string $postcode,
-        public string $city,
-        public string $additional_field,
-        public string $phone,
-        public string $country,
-    ) {}
-}
-
-class Product {
-    public function __construct(
-        public int $id_product,
-        public string $title,
-
-        /**
-         * @var int[]
-         */
-        public array $eans,
-        public int $id_category,
-        public string $main_picture,
-        public string $manufacturer,
-        public string $url,
-        public string $real_mgb_article_number,
-        public int $age_rating,
-        public bool $is_valid,
-        public ?string $dangerous_goods_li_shipping,
-        public ?string $danger_label_9A,
-    ) {}
-}
