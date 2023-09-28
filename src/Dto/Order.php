@@ -11,7 +11,7 @@ class Order {
         public int $order_units_count,
         public DateTime $ts_units_updated_iso,
         public string $storefront,
-        public string $fulfillment_type,
+        public FulfilmentType $fulfillment_type,
 
         public ?Buyer $buyer = null,
         public ?Address $billing_address = null,

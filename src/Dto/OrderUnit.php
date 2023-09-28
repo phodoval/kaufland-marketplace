@@ -27,7 +27,7 @@ class OrderUnit {
         public ?DateTime $order_received_timestamp_iso,
         public int $shipping_rate,
         public ?string $cancel_reason,
-        public string $fulfillment_type,
+        public FulfilmentType $fulfillment_type,
         public ?Buyer $buyer,
         public ?Address $billing_address,
         public ?Address $shipping_address,
