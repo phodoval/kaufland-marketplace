@@ -13,6 +13,10 @@ class Order {
         public string $storefront,
         public string $fulfillment_type,
 
+        public ?Buyer $buyer = null,
+        public ?Address $billing_address = null,
+        public ?Address $shipping_address = null,
+
         /**
          * @var array<OrderUnit> $order_units
          */
