@@ -26,11 +26,14 @@ class Orders extends AbstractNamespace {
      * @return Order|null
      */
     public function get(string $id, array $embedded = null): ?Order {
+        $query = null;
+        if ($embedded !== null) {
+            $query = ['embedded' => implode(',', $embedded)];
+        }
+
         try {
-            return $this->request('GET', '/'.$id, OrderResult::class, query: [
-                'embedded' => !empty($embedded) ? implode(',', $embedded) : null,
-            ])->data;
-        } catch (GuzzleException|MappingError) {
+            return $this->request('GET', '/'.$id, OrderResult::class, query: $query)->data;
+        } catch (GuzzleException|MappingError $e) {
             return null;
         }
     }
