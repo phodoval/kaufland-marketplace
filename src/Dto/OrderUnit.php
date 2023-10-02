@@ -28,10 +28,14 @@ class OrderUnit {
         public int $shipping_rate,
         public ?string $cancel_reason,
         public FulfilmentType $fulfillment_type,
-        public ?Buyer $buyer,
-        public ?Address $billing_address,
-        public ?Address $shipping_address,
         public ?Product $product,
+        public ?Buyer $buyer = null,
+        public ?Address $billing_address = null,
+        public ?Address $shipping_address = null,
+
+        /**
+         * @var string[]
+         */
+        public array $tickets = [],
     ) {}
 }
-
