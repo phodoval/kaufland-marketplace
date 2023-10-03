@@ -26,7 +26,7 @@ class OrderUnit {
         public ?DateTime $delivery_time_expires_iso,
         public ?DateTime $order_received_timestamp_iso,
         public int $shipping_rate,
-        public ?string $cancel_reason,
+        public ?CancelReason $cancel_reason,
         public FulfilmentType $fulfillment_type,
         public ?Product $product,
         public ?Buyer $buyer = null,

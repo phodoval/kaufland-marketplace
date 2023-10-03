@@ -3,10 +3,12 @@ namespace Phodoval\KauflandMarketplace\Namespaces;
 
 use CuyZ\Valinor\Mapper\MappingError;
 use GuzzleHttp\Exception\GuzzleException;
+use Phodoval\KauflandMarketplace\Dto\CancelReason;
 use Phodoval\KauflandMarketplace\Dto\OrderUnit;
 use Phodoval\KauflandMarketplace\Dto\OrderUnitList;
 use Phodoval\KauflandMarketplace\Dto\OrderUnitResult;
 use Phodoval\KauflandMarketplace\Dto\OrderUnitStatus;
+use Phodoval\KauflandMarketplace\Dto\RefundReason;
 
 class OrderUnits extends AbstractNamespace {
     /**
@@ -35,6 +37,44 @@ class OrderUnits extends AbstractNamespace {
         } catch (GuzzleException|MappingError) {
             return null;
         }
+    }
+
+    /**
+     * @return array<string, mixed>
+     * @throws GuzzleException
+     */
+    public function cancel(int $id, CancelReason $reason): array {
+        return $this->client->request('PATCH', $this->getNamespace() . '/' . $id . '/cancel', ['reason' => $reason->value]);
+    }
+
+    /**
+     * @return array<string, mixed>
+     * @throws GuzzleException
+     */
+    public function send(int $id, string $trackingNumber, string $carrierCode): array {
+        return $this->client->request('PATCH', $this->getNamespace() . '/' . $id . '/send', [
+            'tracking_number' => $trackingNumber,
+            'carrier_code' => $carrierCode,
+        ]);
+    }
+
+    /**
+     * @return array<string, mixed>
+     * @throws GuzzleException
+     */
+    public function refund(int $id, float $amount, RefundReason $reason): array {
+        return $this->client->request('PATCH', $this->getNamespace() . '/' . $id . '/refund', [
+            'amount' => round($amount * 100),
+            'reason' => $reason->value,
+        ]);
+    }
+
+    /**
+     * @return array<string, mixed>
+     * @throws GuzzleException
+     */
+    public function fulfil(int $id): array {
+        return $this->client->request('PATCH', $this->getNamespace() . '/' . $id . '/fulfil');
     }
 
     public function getNamespace(): string {
