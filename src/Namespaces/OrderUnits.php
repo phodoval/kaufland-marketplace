@@ -48,12 +48,15 @@ class OrderUnits extends AbstractNamespace {
     }
 
     /**
+     * @param int             $id
+     * @param string|string[] $trackingNumbers
+     * @param string          $carrierCode
      * @return array<string, mixed>
      * @throws GuzzleException
      */
-    public function send(int $id, string $trackingNumber, string $carrierCode): array {
+    public function send(int $id, array|string $trackingNumbers, string $carrierCode): array {
         return $this->client->request('PATCH', $this->getNamespace() . '/' . $id . '/send', [
-            'tracking_number' => $trackingNumber,
+            'tracking_numbers' => is_array($trackingNumbers) ? implode(',', $trackingNumbers) : $trackingNumbers,
             'carrier_code' => $carrierCode,
         ]);
     }

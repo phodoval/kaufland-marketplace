@@ -17,7 +17,7 @@ class Client {
             'headers' => [
                 'Accept' => 'application/json',
                 'Shop-Client-Key' => $this->clientKey,
-                'User-Agent' => 'Guzzle',
+                'User-Agent' => 'Inhouse Development',
             ]
         ]);
     }
