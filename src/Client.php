@@ -9,8 +9,8 @@ class Client {
     protected GuzzleHttp\Client $transport;
 
     public function __construct(
-        private string $clientKey,
-        private string $secretKey,
+        private readonly string $clientKey,
+        private readonly string $secretKey,
     ) {
         $this->transport = new GuzzleHttp\Client([
             'base_uri' => 'https://sellerapi.kaufland.com/v2/',
@@ -83,5 +83,9 @@ class Client {
 
     public function orderUnits(): Namespaces\OrderUnits {
         return new Namespaces\OrderUnits($this);
+    }
+
+    public function orderInvoices(): Namespaces\OrderInvoices {
+        return new Namespaces\OrderInvoices($this);
     }
 }
