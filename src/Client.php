@@ -55,6 +55,10 @@ class Client {
             'query' => $query,
         ];
 
+        if (!empty($data)) {
+            $options['json'] = $data;
+        }
+
         $response = $this->transport->request($method, $uri, $options);
 
         /**
