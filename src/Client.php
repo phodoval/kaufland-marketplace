@@ -60,6 +60,9 @@ class Client {
         }
 
         $response = $this->transport->request($method, $uri, $options);
+        if ($response->getBody()->getSize() === 0) {
+            return [];
+        }
 
         /**
          * @var array<string, mixed>|null $data
