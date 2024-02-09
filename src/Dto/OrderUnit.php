@@ -34,7 +34,7 @@ class OrderUnit {
         public ?Address $shipping_address = null,
 
         /**
-         * @var string[]
+         * @var Ticket[]
          */
         public array $tickets = [],
     ) {}
