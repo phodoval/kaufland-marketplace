@@ -29,6 +29,7 @@ class OrderUnit {
         public ?CancelReason $cancel_reason,
         public FulfilmentType $fulfillment_type,
         public ?Product $product,
+        public ?int $vat,
         public ?Buyer $buyer = null,
         public ?Address $billing_address = null,
         public ?Address $shipping_address = null,

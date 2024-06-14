@@ -1,6 +1,7 @@
 <?php
 namespace Phodoval\KauflandMarketplace\Namespaces;
 
+use Phodoval\KauflandMarketplace\ApiException;
 use Phodoval\KauflandMarketplace\Dto\Order;
 use Phodoval\KauflandMarketplace\Dto\OrderList;
 use Phodoval\KauflandMarketplace\Dto\OrderResult;
@@ -24,6 +25,7 @@ class Orders extends AbstractNamespace {
      * @param string        $id
      * @param string[]|null $embedded
      * @return Order|null
+     * @throws ApiException
      */
     public function get(string $id, array $embedded = null): ?Order {
         $query = null;
@@ -33,8 +35,14 @@ class Orders extends AbstractNamespace {
 
         try {
             return $this->request('GET', '/'.$id, OrderResult::class, query: $query)->data;
-        } catch (GuzzleException|MappingError $e) {
-            return null;
+        } catch (GuzzleException $e) {
+            if ($e->getCode() === 404) {
+                return null;
+            }
+
+            throw new ApiException($e->getMessage(), $e->getCode(), $e);
+        } catch (MappingError $e) {
+            throw new ApiException($e->getMessage(), $e->getCode(), $e);
         }
     }
 

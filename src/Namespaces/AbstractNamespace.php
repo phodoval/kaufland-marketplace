@@ -42,6 +42,7 @@ abstract class AbstractNamespace {
      */
     protected function map(array $data, string $className): mixed {
         return (new MapperBuilder())
+            ->allowSuperfluousKeys()
             ->mapper()
             ->map($className, $data);
     }
