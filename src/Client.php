@@ -8,18 +8,26 @@ use GuzzleHttp\Exception\GuzzleException;
 class Client {
     protected GuzzleHttp\Client $transport;
 
+    /**
+     * @param string               $clientKey
+     * @param string               $secretKey
+     * @param bool                 $playground
+     * @param array<string, mixed> $options    Additional Guzzle options
+     */
     public function __construct(
         private readonly string $clientKey,
         private readonly string $secretKey,
+        private readonly bool $playground = false,
+        private readonly array $options = [],
     ) {
         $this->transport = new GuzzleHttp\Client([
-            'base_uri' => 'https://sellerapi.kaufland.com/v2/',
+            'base_uri' => $this->playground ? 'https://sellerapi-playground.kaufland.com/v2/' : 'https://sellerapi.kaufland.com/v2/',
             'headers' => [
                 'Accept' => 'application/json',
                 'Shop-Client-Key' => $this->clientKey,
                 'User-Agent' => 'Inhouse Development',
             ]
-        ]);
+        ] + $this->options);
     }
 
     /**

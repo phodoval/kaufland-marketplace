@@ -6,4 +6,4 @@ composer require phodoval/kaufland-marketplace
 ```
 
 ## Requirements
-- PHP 8.0 or higher
+- PHP 8.1 or higher
