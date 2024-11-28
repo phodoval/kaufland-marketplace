@@ -14,4 +14,5 @@ enum CancelReason: string {
     case WrongPrice = 'WrongPrice';
     case NoReactionBuyer = 'NoReactionBuyer';
     case UndeliverableRegion = 'UndeliverableRegion';
+    case NoReaction = 'NoReaction';
 }
