@@ -15,4 +15,5 @@ enum CancelReason: string {
     case NoReactionBuyer = 'NoReactionBuyer';
     case UndeliverableRegion = 'UndeliverableRegion';
     case NoReaction = 'NoReaction';
+    case NoInventoryDelayedCheckout = 'NoInventoryDelayedCheckout';
 }
