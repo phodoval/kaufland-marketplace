@@ -1,4 +1,4 @@
-# Kaufland Marketplace Seller API
+# Kaufland Marketplace Seller API PHP SDK
 
 ## Installation
 ```bash
